@@ -1,7 +1,32 @@
 import 'package:danfo_app/otp.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Verification extends StatelessWidget {
+class Verification extends StatefulWidget {
+  @override
+  _VerificationState createState() => _VerificationState();
+}
+
+class _VerificationState extends State<Verification> {
+  final _formKey = GlobalKey<FormState>();
+  final myController = TextEditingController();
+
+  saveNumber(phoneNumber) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.get('phone')) {
+      return prefs.get('phone');
+    } else {
+      await prefs.setString('phone', phoneNumber.toString());
+    }
+  }
+
+  getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print('phone number from local:');
+    print(prefs.get('phone'));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +106,25 @@ class Verification extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 80.0),
-              child: TextFormField(),
+              child: Form(
+                key: _formKey,
+                child: TextFormField(
+                  controller: myController,
+                  keyboardType: TextInputType.phone,
+                  inputFormatters: [
+                    new WhitelistingTextInputFormatter(
+                      new RegExp(r'^[0-9]*$')
+                    ),
+                    new LengthLimitingTextInputFormatter(11)
+                  ],
+                  validator: (String value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your phone number';
+                    }
+                    return null;
+                  },
+                ),
+              ),
             ),
             SizedBox(
               height: 50.0,
@@ -92,9 +135,15 @@ class Verification extends StatelessWidget {
                   // borderRadius: BorderRadius.all(Radius.)
                 ),
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => OtpVerification()
-                  ));
+                  if (_formKey.currentState.validate()) {
+                    saveNumber(myController.text);
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => OtpVerification()
+                    ));
+                    getData();
+                  } else {
+                    print('invalid form');
+                  }
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 110.0, vertical: 15.0),

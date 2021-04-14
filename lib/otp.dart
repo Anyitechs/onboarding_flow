@@ -1,7 +1,21 @@
 import 'package:danfo_app/home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class OtpVerification extends StatelessWidget {
+class OtpVerification extends StatefulWidget {
+  @override
+  _OtpVerificationState createState() => _OtpVerificationState();
+}
+
+class _OtpVerificationState extends State<OtpVerification> {
+  final _formKey = GlobalKey<FormState>();
+
+  getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.get('phone');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +67,7 @@ class OtpVerification extends StatelessWidget {
                   width: 5.0,
                 ),
                 Text(
-                  'One Time Password',
+                  'your number',
                   style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold
@@ -63,7 +77,21 @@ class OtpVerification extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 80.0),
-              child: TextFormField(),
+              child: Form(
+                key: _formKey,
+                child: TextFormField(
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    new LengthLimitingTextInputFormatter(4)
+                  ],
+                  validator: (String value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Enter OTP to proceed';
+                    }
+                    return null;
+                  },
+                ),
+              ),
             ),
             SizedBox(
               height: 20.0,
@@ -93,9 +121,13 @@ class OtpVerification extends StatelessWidget {
                   // borderRadius: BorderRadius.all(Radius.)
                 ),
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => Home()
-                  ));
+                  if (_formKey.currentState.validate()) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Home()
+                    ));
+                  } else {
+                    print('invalid OTP');
+                  }
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 70.0, vertical: 15.0),

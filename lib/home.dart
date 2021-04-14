@@ -5,6 +5,8 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.yellow,
+        // automaticallyImplyLeading: false,
         title: Text(
           'Home'
         ),
@@ -12,8 +14,15 @@ class Home extends StatelessWidget {
       ),
       body: Row(
         children: [
-          Text(
-            'Welcome to Danfo Logistics!'
+          Container(
+            margin: EdgeInsets.only(left: 10.0, top: 10.0),
+            child: Text(
+              'Welcome to Danfo Logistics!',
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold
+              ),
+            ),
           )
         ],
       ),

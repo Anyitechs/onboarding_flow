@@ -68,67 +68,60 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       ),
       pages: [
         PageViewModel(
-          title: "Fractional shares",
+          title: "Fast and speedy delivery!",
           body:
-          "Instead of having to buy an entire share, invest any amount you want.",
+          "DanfoHQ offers fast and speedy delivery at a very affordable price.",
           image: _buildImage('onboard2.jpg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Learn as you go",
+          title: "Pay as you go",
           body:
-          "Download the Stockpile app and master the market with our mini-lesson.",
+          "DanfoHQ offers fast and speedy delivery at a very affordable price.",
           image: _buildImage('onboard3.png'),
           decoration: pageDecoration,
         ),
+        // PageViewModel(
+        //   title: "Full Screen Page",
+        //   body:
+        //   "Pages can be full screen as well.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id euismod lectus, non tempor felis. Nam rutrum rhoncus est ac venenatis.",
+        //   image: _buildFullscrenImage(),
+        //   decoration: pageDecoration.copyWith(
+        //     contentMargin: const EdgeInsets.symmetric(horizontal: 16),
+        //     fullScreen: true,
+        //     bodyFlex: 2,
+        //     imageFlex: 3,
+        //   ),
+        // ),
         PageViewModel(
-          title: "Kids and teens",
-          body:
-          "Kids and teens can track their stocks 24/7 and place trades that you approve.",
-          image: _buildImage('phone.jpg'),
-          decoration: pageDecoration,
-        ),
-        PageViewModel(
-          title: "Full Screen Page",
-          body:
-          "Pages can be full screen as well.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id euismod lectus, non tempor felis. Nam rutrum rhoncus est ac venenatis.",
-          image: _buildFullscrenImage(),
-          decoration: pageDecoration.copyWith(
-            contentMargin: const EdgeInsets.symmetric(horizontal: 16),
-            fullScreen: true,
-            bodyFlex: 2,
-            imageFlex: 3,
-          ),
-        ),
-        PageViewModel(
-          title: "Another title page",
-          body: "Another beautiful body text for this example onboarding",
+          title: "DanfoHQ to the moon!",
+          body: "Smooth and fast delivery service!",
           image: _buildImage('otp.jpg'),
-          footer: ElevatedButton(
-            onPressed: () {
-              introKey.currentState?.animateScroll(0);
-            },
-            child: const Text(
-              'FooButton',
-              style: TextStyle(color: Colors.white),
-            ),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.lightBlue,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-            ),
-          ),
+          // footer: ElevatedButton(
+          //   onPressed: () {
+          //     introKey.currentState?.animateScroll(0);
+          //   },
+          //   child: const Text(
+          //     'FooButton',
+          //     style: TextStyle(color: Colors.white),
+          //   ),
+          //   style: ElevatedButton.styleFrom(
+          //     primary: Colors.lightBlue,
+          //     shape: RoundedRectangleBorder(
+          //       borderRadius: BorderRadius.circular(8.0),
+          //     ),
+          //   ),
+          // ),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Title of last page - reversed",
+          title: "DanfoHQ - deliveries at your door step",
           bodyWidget: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Text("Click on ", style: bodyStyle),
-              Icon(Icons.edit),
-              Text(" to edit a post", style: bodyStyle),
+              // Text("Click on ", style: bodyStyle),
+              // Icon(Icons.edit),
+              Text("Danfo - deliveries at your door step", style: bodyStyle),
             ],
           ),
           decoration: pageDecoration.copyWith(
